@@ -1,0 +1,29 @@
+<h1>Listing mensagens</h1>
+
+<table>
+  <tr>
+    <th>Conteudo</th>
+    <th>Usuario</th>
+    <th>Resposta</th>
+    <th>Resposta para mensagem</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @mensagens.each do |mensagem| %>
+  <tr>
+    <td><%= mensagem.conteudo %></td>
+    <td><%= mensagem.usuario_id %></td>
+    <td><%= mensagem.resposta %></td>
+    <td><%= mensagem.resposta_para_mensagem_id %></td>
+    <td><%= link_to 'Show', mensagem %></td>
+    <td><%= link_to 'Edit', edit_mensagem_path(mensagem) %></td>
+    <td><%= link_to 'Destroy', mensagem, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Mensagem', new_mensagem_path %>

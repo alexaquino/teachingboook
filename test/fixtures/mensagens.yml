@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  conteudo: MyText
+  usuario_id: 1
+  resposta: false
+  resposta_para_mensagem_id: 1
+
+two:
+  conteudo: MyText
+  usuario_id: 1
+  resposta: false
+  resposta_para_mensagem_id: 1
