@@ -1,0 +1,14 @@
+</h1>
+
+<p>
+Olá <%= @user_first_name %>, você tem <%= @friends_total %> amigos.
+
+  <ul>
+    <li>
+      Homens: <%= @males  %> (<%= gender_percent :of => :males %>%)
+    </li>
+    <li>
+      Mulheres: <%= @females %> (<%= gender_percent :of => :females %>%)
+    </li>
+  </ul>
+</p>

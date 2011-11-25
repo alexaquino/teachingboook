@@ -1,0 +1,23 @@
+secret: &secret
+  :APP_ID:     '151286081628731'
+  :APP_SECRET: '8f9941582723540fc7c5a42a97a3aaac'
+
+public: &public
+  :CANVAS_PAGE: 'http://apps.facebook.com/teachingboook/'
+
+production:
+  <<: *secret
+  <<: *public
+  :CALLBACK_URL: &callback
+    :SITE:   'http://site_hospedado/auth'
+    :CANVAS: 'http://site_hospedado/auth?redirect_to=canvas_page'
+
+development: &development
+  <<: *secret
+  <<: *public
+  :CALLBACK_URL:
+    :SITE:   'http://localhost:3000/auth'
+    :CANVAS: 'http://localhost:3000/auth?redirect_to=canvas_page'
+
+test:
+  <<: *development

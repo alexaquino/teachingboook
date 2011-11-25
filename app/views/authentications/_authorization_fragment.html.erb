@@ -1,0 +1,7 @@
+<script type="text/javascript">
+  url          = 'https://graph.facebook.com/oauth/authorize?'
+  client_id    = 'client_id=<%= @client_id %>'
+  redirect_uri = 'redirect_uri=<%= @redirect_uri %>'
+
+  top.location.href = url + '&' + client_id + '&' + redirect_uri
+</script>
