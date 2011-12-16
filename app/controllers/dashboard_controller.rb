@@ -11,7 +11,7 @@ class DashboardController < ApplicationController
     @friends_total = friends.count
 
     friend_ids = friends.collect { |friend| friend['id'] }
-    @genders   = api_client.rest_call('users.getInfo', {:uids => friend_ids, :fields => 'sex'})
+    @genders   = api_client.rest_call('users.getinfo', {:uids => friend_ids, :fields => 'sex'})
 
     @males   = @genders.count{ |friend| friend['sex'] == 'male'}
     @females = (genders_total - @males).to_i
@@ -24,6 +24,6 @@ class DashboardController < ApplicationController
   end
 
   def api_client
-    Koala::Facebook::GraphAndRestAPI.new(session[:user_token])
+    Koala::Facebook::API.new(session[:user_token])
   end
 end
