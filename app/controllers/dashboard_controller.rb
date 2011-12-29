@@ -6,14 +6,21 @@ class DashboardController < ApplicationController
   def index
     user    = api_client.get_object('me')
     @user_first_name = user['first_name']
+    @user_gender = user['gender']
 
     friends        = api_client.get_connections('me', 'friends')
     @friends_total = friends.count
 
     friend_ids = friends.collect { |friend| friend['id'] }
-    @genders   = api_client.rest_call('users.getinfo', {:uids => friend_ids, :fields => 'sex'})
-
-    @males   = @genders.count{ |friend| friend['sex'] == 'male'}
+    @genders   = Array.new
+    
+    friend_genders = api_client.get_objects(friend_ids, {:fields => 'gender'})
+    
+    friend_genders.each do |f|
+      @genders << f[1]['gender']
+    end
+    
+    @males   = @genders.count{ |friend| friend == 'male'}
     @females = (genders_total - @males).to_i
   end
 
