@@ -1,10 +1,14 @@
 class DashboardController < ApplicationController
+  require 'date'
+  require 'usuario'
+  
   before_filter :require_authentication, :only => :index
 
   helper_method :genders_total
 
   def index
     user    = api_client.get_object('me')
+    login (user)
     @user_first_name = user['first_name']
     @user_gender = user['gender']
 
@@ -25,6 +29,24 @@ class DashboardController < ApplicationController
   end
 
   private
+  
+  def login usuario
+    if usuario_existe?(usuario)
+      return
+    end
+    
+    new_user = Usuario.new({:fb_id => usuario['id'].to_i, :nome => usuario['name'], :data_nascimento => Date.strptime(usuario['birthday'], '%m/%d/%Y')})
+    new_user.save
+  end
+  
+  def usuario_existe? usuario
+    puts '********************************' + usuario['id']
+    if Usuario.find_by_fb_id(usuario['id'].to_i)
+      true
+    else
+      false
+    end
+  end
 
   def genders_total
     @genders.size.to_f

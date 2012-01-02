@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110915134323) do
+ActiveRecord::Schema.define(:version => 20120102142102) do
 
   create_table "mensagens", :force => true do |t|
     t.text     "conteudo"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20110915134323) do
   end
 
   create_table "usuarios", :force => true do |t|
-    t.integer  "fb_id"
+    t.integer  "fb_id",           :limit => 8
     t.string   "nome"
     t.date     "data_nascimento"
     t.datetime "created_at"
