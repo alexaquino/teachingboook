@@ -11,4 +11,5 @@
 
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'mensagem', 'mensagens'
+  inflect.irregular 'professor', 'professores'
 end
