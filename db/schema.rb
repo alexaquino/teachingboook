@@ -10,7 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120104161626) do
+ActiveRecord::Schema.define(:version => 20110915134323) do
+
+  create_table "alunos_turmas", :id => false, :force => true do |t|
+    t.integer "aluno_id"
+    t.integer "turma_id"
+  end
+
+  add_index "alunos_turmas", ["aluno_id", "turma_id"], :name => "index_alunos_turmas_on_aluno_id_and_turma_id", :unique => true
 
   create_table "mensagens", :force => true do |t|
     t.text     "conteudo"
@@ -24,15 +31,10 @@ ActiveRecord::Schema.define(:version => 20120104161626) do
 
   create_table "turmas", :force => true do |t|
     t.string   "disciplina"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "professor_id", :limit => 8
     t.integer  "group_id",     :limit => 8
-  end
-
-  create_table "turmas_alunos", :id => false, :force => true do |t|
-    t.integer "turma_id"
-    t.integer "aluno_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "usuarios", :force => true do |t|
