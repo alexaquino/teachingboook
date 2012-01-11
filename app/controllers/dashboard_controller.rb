@@ -8,29 +8,14 @@ class DashboardController < ApplicationController
 
   def index
     user    = api_client.get_object('me')
-    login (user)
+    usuario = login (user)
     
-    @user_first_name = user['first_name']
-    user_groups = api_client.get_object('me/groups')
+    @user_name = usuario.nome
     
-    if user_groups
-      cadastrar_grupos user_groups, user
-    end
-
-    friends        = api_client.get_connections('me', 'friends')
-    @friends_total = friends.count
-
-    friend_ids = friends.collect { |friend| friend['id'] }
-    @genders   = Array.new
+    puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>"
+    @minhas_turmas = usuario.turmas
     
-    friend_genders = api_client.get_objects(friend_ids, {:fields => 'gender'})
-    
-    friend_genders.each do |f|
-      @genders << f[1]['gender']
-    end
-    
-    @males   = @genders.count{ |friend| friend == 'male'}
-    @females = (genders_total - @males).to_i
+    @minhas_disciplinas = usuario.disciplinas
   end
 
   private
@@ -40,6 +25,15 @@ class DashboardController < ApplicationController
       new_user = Usuario.new({:fb_id => usuario['id'].to_i, :nome => usuario['name'], :data_nascimento => Date.strptime(usuario['birthday'], '%m/%d/%Y')})
       new_user.save
     end
+    
+    user_groups = api_client.get_object('me/groups')
+    
+    if user_groups
+      cadastrar_grupos user_groups, usuario
+    end
+    
+    Usuario.find_by_fb_id(usuario['id'])
+    
   end
   
   def usuario_existe? usuario
@@ -75,10 +69,6 @@ class DashboardController < ApplicationController
     else
       false
     end
-  end
-
-  def genders_total
-    @genders.size.to_f
   end
 
   def api_client

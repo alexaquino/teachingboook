@@ -5,6 +5,26 @@
   <%= @turma.disciplina %>
 </p>
 
+<p>
+  <b>Professor:</b>
+  <%= link_to @turma.professor.nome, @turma.professor %>
+</p>
+
+<table>
+	<tr>
+  	<th>Alunos:</th>
+  	<th></th>
+  	<th></th>
+  	<th></th>
+  </tr>
+
+	<% @turma.alunos.each do |aluno| %>
+		<tr>
+			<td><%= link_to aluno.nome, aluno %></td>
+		</tr>
+	<% end %>
+</table>
+
 
 <%= link_to 'Edit', edit_turma_path(@turma) %> |
 <%= link_to 'Back', turmas_path %>
