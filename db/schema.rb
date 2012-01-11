@@ -21,15 +21,15 @@ ActiveRecord::Schema.define(:version => 20110915134323) do
 
   create_table "mensagens", :force => true do |t|
     t.text     "conteudo"
-    t.integer  "autor_id",    :limit => 8
-    t.integer  "objeto_id",   :limit => 8
-    t.string   "objeto_type"
+    t.integer  "autor_id",       :limit => 8
+    t.integer  "recebedor_id",   :limit => 8
+    t.string   "recebedor_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "mensagens", ["objeto_id"], :name => "index_mensagens_on_objeto_id"
-  add_index "mensagens", ["objeto_type"], :name => "index_mensagens_on_objeto_type"
+  add_index "mensagens", ["recebedor_id"], :name => "index_mensagens_on_recebedor_id"
+  add_index "mensagens", ["recebedor_type"], :name => "index_mensagens_on_recebedor_type"
 
   create_table "turmas", :force => true do |t|
     t.string   "disciplina"

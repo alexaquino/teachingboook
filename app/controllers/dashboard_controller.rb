@@ -11,10 +11,7 @@ class DashboardController < ApplicationController
     usuario = login (user)
     
     @user_name = usuario.nome
-    
-    puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>"
     @minhas_turmas = usuario.turmas
-    
     @minhas_disciplinas = usuario.disciplinas
   end
 

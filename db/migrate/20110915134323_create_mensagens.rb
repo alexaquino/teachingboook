@@ -3,14 +3,14 @@ class CreateMensagens < ActiveRecord::Migration
     create_table :mensagens do |t|
       t.text :conteudo
       t.integer :autor_id, :limit => 8
-      t.integer :objeto_id, :limit => 8
-      t.string :objeto_type
+      t.integer :recebedor_id, :limit => 8
+      t.string :recebedor_type
 
       t.timestamps
     end
 
-    add_index :mensagens, :objeto_type
-    add_index :mensagens, :objeto_id
+    add_index :mensagens, :recebedor_type
+    add_index :mensagens, :recebedor_id
 
     
   end

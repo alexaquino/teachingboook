@@ -1,0 +1,26 @@
+<div id='nova_mensagem'>
+	<a href="#" onclick="$('#nova_mensagem').children().toggle();">Nova Mensagem</a>
+	<div id="form_mensagem" style="display: none;">
+		<%= form_for Mensagem.new, :remote => true do |f| %>
+			<%= hidden_field :mensagem, :recebedor_id, :value => recebedor.id %>
+			<%= hidden_field :mensagem, :recebedor_type, :value => recebedor.class %>
+			<div class="field">
+				<%= f.label 'Conteúdo' %><br />
+				<%= f.text_area 'conteudo' %>
+			</div>
+			<div class="actions">
+				<%= f.submit %>
+				<a href="#" onclick="$('#nova_mensagem').children().toggle();">Cancelar</a>
+			</div>
+		<% end %>
+	</div>
+</div>
+
+<%content_for :js do%>
+	$('#form_mensagem').bind('ajax:complete', function(xhr, result){
+		$('#mensagens').html(result.responseText);
+		$('#form_mensagem textarea').val("")
+		$('#form_mensagem').hide();
+		$('#nova_mensagem > a').show();
+	});
+<% end %>

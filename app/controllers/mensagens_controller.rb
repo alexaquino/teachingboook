@@ -44,8 +44,9 @@ class MensagensController < ApplicationController
 
     respond_to do |format|
       if @mensagem.save
-        format.html { redirect_to(@mensagem, :notice => 'Mensagem was successfully created.') }
+        #format.html { redirect_to(@mensagem, :notice => 'Mensagem was successfully created.') }
         format.xml  { render :xml => @mensagem, :status => :created, :location => @mensagem }
+        format.js   {}
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @mensagem.errors, :status => :unprocessable_entity }
@@ -76,8 +77,8 @@ class MensagensController < ApplicationController
     @mensagem.destroy
 
     respond_to do |format|
-      format.html { redirect_to(mensagens_url) }
       format.xml  { head :ok }
+      format.js   { head :ok }
     end
   end
 end

@@ -15,8 +15,8 @@
   <tr>
     <td><%= mensagem.conteudo %></td>
     <td><%= mensagem.autor.nome %></td>
-    <td><%= mensagem.objeto_id %></td>
-    <td><%= mensagem.objeto_type %></td>
+    <td><%= mensagem.recebedor_id %></td>
+    <td><%= mensagem.recebedor_type %></td>
     <td><%= link_to 'Show', mensagem %></td>
     <td><%= link_to 'Edit', edit_mensagem_path(mensagem) %></td>
     <td><%= link_to 'Destroy', mensagem, :confirm => 'Certeza que quer apagar?', :method => :delete %></td>

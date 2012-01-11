@@ -1,0 +1,12 @@
+<p id="mensagem_<%= mensagem.id %>">
+	<%= mensagem.conteudo %> - <%= link_to 'Remover', mensagem, :method => :delete, :remote => true, :id => "remove_mensagem_#{mensagem.id}" %>
+</p>
+
+<%=content_for :js do%>
+	$('#remove_mensagem_<%=mensagem.id%>').bind(
+		'ajax:success',
+		function(xhr, result){
+			$('#mensagem_<%=mensagem.id%>').remove();
+		}
+	);
+<%end%>
