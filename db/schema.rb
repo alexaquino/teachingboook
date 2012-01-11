@@ -13,21 +13,23 @@
 ActiveRecord::Schema.define(:version => 20110915134323) do
 
   create_table "alunos_turmas", :id => false, :force => true do |t|
-    t.integer "aluno_id"
-    t.integer "turma_id"
+    t.integer "aluno_id", :limit => 8
+    t.integer "turma_id", :limit => 8
   end
 
   add_index "alunos_turmas", ["aluno_id", "turma_id"], :name => "index_alunos_turmas_on_aluno_id_and_turma_id", :unique => true
 
   create_table "mensagens", :force => true do |t|
     t.text     "conteudo"
-    t.integer  "usuario_id"
-    t.integer  "turma_id"
-    t.boolean  "resposta"
-    t.integer  "resposta_para_mensagem_id"
+    t.integer  "autor_id",    :limit => 8
+    t.integer  "objeto_id",   :limit => 8
+    t.string   "objeto_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "mensagens", ["objeto_id"], :name => "index_mensagens_on_objeto_id"
+  add_index "mensagens", ["objeto_type"], :name => "index_mensagens_on_objeto_type"
 
   create_table "turmas", :force => true do |t|
     t.string   "disciplina"

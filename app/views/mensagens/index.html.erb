@@ -3,9 +3,9 @@
 <table>
   <tr>
     <th>Conteudo</th>
-    <th>Usuario</th>
-    <th>Resposta</th>
-    <th>Resposta para mensagem</th>
+    <th>Autor</th>
+    <th>Objeto Id</th>
+    <th>Tipo do Objeto</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,12 +14,12 @@
 <% @mensagens.each do |mensagem| %>
   <tr>
     <td><%= mensagem.conteudo %></td>
-    <td><%= mensagem.usuario_id %></td>
-    <td><%= mensagem.resposta %></td>
-    <td><%= mensagem.resposta_para_mensagem_id %></td>
+    <td><%= mensagem.autor.nome %></td>
+    <td><%= mensagem.objeto_id %></td>
+    <td><%= mensagem.objeto_type %></td>
     <td><%= link_to 'Show', mensagem %></td>
     <td><%= link_to 'Edit', edit_mensagem_path(mensagem) %></td>
-    <td><%= link_to 'Destroy', mensagem, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', mensagem, :confirm => 'Certeza que quer apagar?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
