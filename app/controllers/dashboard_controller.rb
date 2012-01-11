@@ -61,8 +61,9 @@ class DashboardController < ApplicationController
         if (grupo_existe? g) && (!g['administrator'])
           turma = Turma.find_by_group_id(g['id'])
           user = Usuario.find_by_fb_id(usuario['id'])
-          turma.aluno_ids = user.id
-          turma.save
+          if !turma.alunos.member? user
+            turma.alunos << user
+          end
         end
       end
     end
