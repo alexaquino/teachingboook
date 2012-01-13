@@ -1,18 +1,13 @@
 class DashboardController < ApplicationController
-  require 'date'
-  require 'usuario'
-  
   before_filter :require_authentication, :only => :index
 
   helper_method :genders_total
 
   def index
-    user    = api_client.get_object('me')
-    usuario = login (user)
     
-    @user_name = usuario.nome
-    @minhas_turmas = usuario.turmas
-    @minhas_disciplinas = usuario.disciplinas
+    user    = api_client.get_object('me')
+    @usuario = login (user)
+    
   end
 
   private
@@ -68,7 +63,4 @@ class DashboardController < ApplicationController
     end
   end
 
-  def api_client
-    Koala::Facebook::API.new(session[:user_token])
-  end
 end

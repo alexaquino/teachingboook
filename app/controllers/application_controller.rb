@@ -16,5 +16,9 @@ class ApplicationController < ActionController::Base
                 :action      => :create,
                 :redirect_to => params[:redirect_to])
   end
+  
+  def api_client
+    Koala::Facebook::API.new(session[:user_token])
+  end
 
 end

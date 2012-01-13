@@ -14,6 +14,7 @@ class UsuariosController < ApplicationController
   # GET /usuarios/1.xml
   def show
     @usuario = Usuario.find(params[:id])
+    @usuario_foto_url = 'https://graph.facebook.com/' + @usuario.fb_id.to_s + '/picture?type=normal'
 
     respond_to do |format|
       format.html # show.html.erb

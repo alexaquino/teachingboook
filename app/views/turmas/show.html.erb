@@ -7,17 +7,22 @@
 
 <p>
   <b>Professor:</b>
-  <%= link_to @turma.professor.nome, @turma.professor %>
+  <table>
+  	<tr>
+  		<td>
+  			<img src="<%= @professor_foto_url %>" />
+  		</td>
+  		<td>
+  			<%= link_to @turma.professor.nome, @turma.professor %>
+  		</td>
+  	</tr>
+  </table>
 </p>
 
 <table>
 	<tr>
   	<th>Alunos:</th>
-  	<th></th>
-  	<th></th>
-  	<th></th>
   </tr>
-
 	<% @turma.alunos.each do |aluno| %>
 		<tr>
 			<td><%= link_to aluno.nome, aluno %></td>

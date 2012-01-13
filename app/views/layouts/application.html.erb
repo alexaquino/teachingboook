@@ -7,11 +7,18 @@
 	  <%= csrf_meta_tag %>
 	</head>
 	<body>
-	
-		<%= yield %>
+		<div id="top_bar">
+			<div id="left_part">
+				<a href="/dashboard" class="top_bar"><b>TeachingBook</b></a>
+			</div>
+		</div>
 		
+		<div id="main_page">
+			<%= yield %>
+		</div>
+				
 		<script type="text/javascript">
-			<%=yield :js%>
+			<%= yield :js %>
 		</script>
 
 	</body>
