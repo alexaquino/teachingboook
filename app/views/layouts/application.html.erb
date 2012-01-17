@@ -9,12 +9,24 @@
 	<body>
 		<div id="top_bar">
 			<div id="left_part">
-				<a href="/dashboard" class="top_bar"><b>TeachingBook</b></a>
+				<a href="/dashboard" class="top_bar">
+					<img src="/images/topbar/aaa.png"/>
+				</a>
 			</div>
 		</div>
 		
 		<div id="main_page">
-			<%= yield %>
+			
+			<div id="left_column">
+				<% if session[:current_user]%>
+					<%= render :partial => "layouts/usuario" %>
+				<% end %>
+			</div>
+			
+			<div id="main_column">
+				<%= yield %>
+			</div>
+			
 		</div>
 				
 		<script type="text/javascript">

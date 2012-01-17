@@ -1,32 +1,36 @@
 </h1>
 
 <p>
-Olá <%= @usuario.nome %>,
+	Seja Bem Vindo, <%= @usuario.nome %>!
 
-	<table>
-		<tr>
-    	<th>Você é professor das turmas</th>
-    </tr>
-
-		<% @usuario.turmas.each do |turma| %>
+	<% unless @usuario.turmas.empty? %>
+		<table>
 			<tr>
-				<td><%= turma.disciplina %></td>
-				<td><%= link_to 'Show', turma %></td>
-			</tr>
-		<% end %>
-	</table>
+	    	<th>Você é professor das turmas</th>
+	    </tr>
+	
+			<% @usuario.turmas.each do |turma| %>
+				<tr>
+					<td><%= link_to turma.disciplina, turma %></td>
+				</tr>
+			<% end %>
+		</table>
+	<% end %>
+	
 	<br />	
-	<table>
-		<tr>
-    	<th>Você está matriculado nas turmas</th>
-    </tr>
-
-		<% @usuario.disciplinas.each do |disciplina| %>
+	
+	<% unless @usuario.disciplinas.empty? %>
+		<table>
 			<tr>
-				<td><%= disciplina.disciplina %></td>
-				<td><%= link_to 'Show', disciplina %></td>
-			</tr>
-		<% end %>
-	</table>  
+	    	<th>Você está matriculado nas turmas</th>
+	    </tr>
+	
+			<% @usuario.disciplinas.each do |disciplina| %>
+				<tr>
+					<td><%= link_to disciplina.disciplina, disciplina %></td>
+				</tr>
+			<% end %>
+		</table>
+	<% end %>
 
 </p>

@@ -41,6 +41,16 @@ class MensagensController < ApplicationController
   # POST /mensagens.xml
   def create
     @mensagem = Mensagem.new(params[:mensagem])
+    @mensagem.autor = session[:current_user]
+    id_to_post = String.new
+    
+    case @mensagem.recebedor_type
+    when "Turma"
+      aux = Turma.find(@mensagem.recebedor_id)
+      id_to_post = aux.group_id
+    end
+    
+    @mensagem.post_id = api_client.put_wall_post(@mensagem.conteudo, {}, id_to_post)['id']
 
     respond_to do |format|
       if @mensagem.save
@@ -74,6 +84,7 @@ class MensagensController < ApplicationController
   # DELETE /mensagens/1.xml
   def destroy
     @mensagem = Mensagem.find(params[:id])
+    api_client.delete_object(@mensagem.post_id)
     @mensagem.destroy
 
     respond_to do |format|

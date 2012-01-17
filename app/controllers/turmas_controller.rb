@@ -15,7 +15,7 @@ class TurmasController < ApplicationController
   def show
     @turma = Turma.find(params[:id])
     @professor_foto_url = 'https://graph.facebook.com/' + @turma.professor.fb_id.to_s + '/picture?type=normal'
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @turma }

@@ -1,0 +1,13 @@
+<table class="left_column">
+	<tr>
+		<td align="center">
+			<img src="https://graph.facebook.com/<%= session[:current_user].fb_id%>/picture?type=normal" />
+		</td>
+	</tr>
+	
+	<tr>
+		<td align="center">
+			<%= link_to session[:current_user].nome, session[:current_user]%>
+		</td>
+	</tr>
+</table>

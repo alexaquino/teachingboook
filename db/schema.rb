@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110915134323) do
+ActiveRecord::Schema.define(:version => 20120117143736) do
 
   create_table "alunos_turmas", :id => false, :force => true do |t|
     t.integer "aluno_id", :limit => 8
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20110915134323) do
     t.string   "recebedor_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "post_id"
   end
 
   add_index "mensagens", ["recebedor_id"], :name => "index_mensagens_on_recebedor_id"

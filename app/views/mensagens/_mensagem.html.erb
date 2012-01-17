@@ -1,6 +1,23 @@
-<p id="mensagem_<%= mensagem.id %>">
-	<%= mensagem.conteudo %> - <%= link_to 'Remover', mensagem, :method => :delete, :remote => true, :id => "remove_mensagem_#{mensagem.id}" %>
-</p>
+<div id="mensagem_<%= mensagem.id %>">
+	<p>
+		<table>
+			<tr>
+				<td>
+					<img src="https://graph.facebook.com/<%= mensagem.autor.fb_id.to_s %>/picture?type=small" />
+				</td>
+				<td>
+					<%=link_to mensagem.autor.nome, mensagem.autor%> disse:
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<%= mensagem.conteudo %> - <%= link_to 'Remover', mensagem, :method => :delete, :remote => true, :id => "remove_mensagem_#{mensagem.id}" %>
+				</td>
+			</tr>
+		</table>
+	</p>
+</div>
 
 <%=content_for :js do%>
 	$('#remove_mensagem_<%=mensagem.id%>').bind(
