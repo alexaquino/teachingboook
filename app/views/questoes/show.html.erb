@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Pergunta:</b>
+  <%= @questao.pergunta %>
+</p>
+
+<p>
+  <b>Autor:</b>
+  <%= @questao.autor.nome %>
+</p>
+
+<table>
+	<tr>
+  	<th>Respostas:</th>
+  </tr>
+	<% @questao.respostas.each do |resposta| %>
+		<tr>
+			<td><%= resposta.conteudo %></td>
+			<td>
+				<%= form_for(resposta) do |f| %>		
+					<%= f.text_field :nota, :size => 3 %> | <%= f.submit "Salvar Nota"%>
+				<% end %>
+			</td>
+		</tr>
+	<% end %>
+</table>
+
+
+<%= link_to 'Edit', edit_questao_path(@questao) %> |
+<%= link_to 'Back', questoes_path %>

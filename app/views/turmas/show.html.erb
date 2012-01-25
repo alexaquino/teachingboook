@@ -30,8 +30,13 @@
 	<% end %>
 </table>
 
-<% unless @turma.mensagens.empty? %>
-	<%= mensagens @turma %>
-<% end %>
-
-<%= nova_mensagem @turma %>
+<table>
+	<tr>
+  	<th>Questões:</th>
+  </tr>
+	<% @turma.questoes.each do |questao| %>
+		<tr>
+			<td><%= link_to questao.pergunta, questao %></td>
+		</tr>
+	<% end %>
+</table>

@@ -3,16 +3,30 @@
 		<table>
 			<tr>
 				<td>
-					<img src="https://graph.facebook.com/<%= mensagem.autor.fb_id.to_s %>/picture?type=small" />
+					<table>
+						<tr>
+							<td>
+								<img src="https://graph.facebook.com/<%= mensagem.autor.fb_id.to_s %>/picture?type=small" />
+							</td>
+							<td>
+								<%=link_to mensagem.autor.nome, mensagem.autor%> disse:
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<%= mensagem.conteudo %> - <%= link_to 'Remover', mensagem, :method => :delete, :remote => true, :id => "remove_mensagem_#{mensagem.id}" %>
+							</td>
+						</tr>
+					</table>
 				</td>
 				<td>
-					<%=link_to mensagem.autor.nome, mensagem.autor%> disse:
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>
-					<%= mensagem.conteudo %> - <%= link_to 'Remover', mensagem, :method => :delete, :remote => true, :id => "remove_mensagem_#{mensagem.id}" %>
+					<%= form_for mensagem, :remote => true do |f| %>
+						<%= f.text_field :nota %>
+						<div class="actions">
+							<%= f.submit %>
+						</div>
+					<% end %>
 				</td>
 			</tr>
 		</table>

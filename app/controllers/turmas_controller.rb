@@ -16,6 +16,8 @@ class TurmasController < ApplicationController
     @turma = Turma.find(params[:id])
     @professor_foto_url = 'https://graph.facebook.com/' + @turma.professor.fb_id.to_s + '/picture?type=normal'
     
+    load_questoes
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @turma }
@@ -81,4 +83,19 @@ class TurmasController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  private
+  
+  def load_questoes
+    user = session[:current_user]
+    msgs = api_client.get_connections(@turma.group_id, "feed")
+    msgs.each do |m|
+      if ((!Questao.find_by_post_id(m['id'])) and (m['from']['id'] == user.fb_id.to_s))
+        questao = Questao.new({:pergunta => m['message'], :post_id => m['id'], :autor_id => user.id, :turma_id => @turma.id})
+        puts questao.pergunta
+        questao.save
+      end
+    end
+  end
+  
 end

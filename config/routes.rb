@@ -1,9 +1,11 @@
 Teachingboook::Application.routes.draw do
   
+  resources :questoes
+
   match "/canvas" => "authentications#canvas"
   match "/auth"   => "authentications#auth"
 
-  root :to => "dashboard#index"
+  root :to => "login#index"
   
   resources :mensagens
 

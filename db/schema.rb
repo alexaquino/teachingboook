@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120117143736) do
+ActiveRecord::Schema.define(:version => 20120123164723) do
 
   create_table "alunos_turmas", :id => false, :force => true do |t|
     t.integer "aluno_id", :limit => 8
@@ -27,10 +27,20 @@ ActiveRecord::Schema.define(:version => 20120117143736) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "post_id"
+    t.float    "nota"
   end
 
   add_index "mensagens", ["recebedor_id"], :name => "index_mensagens_on_recebedor_id"
   add_index "mensagens", ["recebedor_type"], :name => "index_mensagens_on_recebedor_type"
+
+  create_table "questoes", :force => true do |t|
+    t.text     "pergunta"
+    t.integer  "autor_id",   :limit => 8
+    t.integer  "turma_id",   :limit => 8
+    t.string   "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "turmas", :force => true do |t|
     t.string   "disciplina"

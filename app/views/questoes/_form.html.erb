@@ -1,0 +1,25 @@
+<%= form_for(@questao) do |f| %>
+  <% if @questao.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@questao.errors.count, "error") %> prohibited this questao from being saved:</h2>
+
+      <ul>
+      <% @questao.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :pergunta %><br />
+    <%= f.text_area :pergunta %>
+  </div>
+  <div class="field">
+    <%= f.label :autor_id %><br />
+    <%= f.text_field :autor_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
