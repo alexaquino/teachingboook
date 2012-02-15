@@ -91,7 +91,11 @@ class TurmasController < ApplicationController
     msgs = api_client.get_connections(@turma.group_id, "feed")
     msgs.each do |m|
       if ((!Questao.find_by_post_id(m['id'])) and (m['from']['id'] == user.fb_id.to_s))
-        questao = Questao.new({:pergunta => m['message'], :post_id => m['id'], :autor_id => user.id, :turma_id => @turma.id})
+        data = m['created_time'].slice(0, 10)
+        hora = m['created_time'].slice(11, 8)
+        data_hora = data.to_s + ' ' + hora.to_s
+        puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + data_hora
+        questao = Questao.new({:pergunta => m['message'], :post_id => m['id'], :autor_id => user.id, :turma_id => @turma.id, :created_at => DateTime.strptime(data_hora, "%Y-%m-%d %H:%M:%S").to_time, :updated_at => DateTime.strptime(data_hora, "%Y-%m-%d %H:%M:%S").to_time})
         puts questao.pergunta
         questao.save
       end

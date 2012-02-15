@@ -14,7 +14,17 @@
 	<tr>
   	<th>Respostas:</th>
   </tr>
-	<% @questao.respostas.each do |resposta| %>
+	<% @questao.respostas.where("nota is null").order("created_at").each do |resposta| %>
+		<tr>
+			<td><%= resposta.conteudo %></td>
+			<td>
+				<%= form_for(resposta) do |f| %>		
+					<%= f.text_field :nota, :size => 3 %> | <%= f.submit "Salvar Nota"%>
+				<% end %>
+			</td>
+		</tr>
+	<% end %>
+	<% @questao.respostas.where("nota is not null").order("created_at").each do |resposta| %>
 		<tr>
 			<td><%= resposta.conteudo %></td>
 			<td>
@@ -28,4 +38,5 @@
 
 
 <%= link_to 'Edit', edit_questao_path(@questao) %> |
-<%= link_to 'Back', questoes_path %>
+<%= link_to 'Back', questoes_path %> |
+<%= link_to 'Boletim', {:controller => 'questoes', :action => 'questao_report', :id => @questao} %>

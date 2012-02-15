@@ -1,0 +1,8 @@
+xml.instruct!
+xml.questao_to_report_result do
+	xml.invoice_questao do
+		@mensagens.each do |m|
+			xml << m.to_xml(:dasherize=>false,:skip_instruct=>true,:only=>[:nota,:created_at,:nome,:pergunta],:root=>"mensagem",:include=>[:autor, :recebedor])
+		end
+	end
+end

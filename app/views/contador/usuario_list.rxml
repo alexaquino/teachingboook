@@ -1,0 +1,8 @@
+xml.instruct!
+xml.usuario_list_result do
+	xml.invoice_usuarios do
+		@usuarios.each do |usuario|
+			xml << usuario.to_xml(:dasherize=>false,:skip_instruct=>true,:only=>[:id,:nome],:root=>"usuario")
+		end
+	end
+end

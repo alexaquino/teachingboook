@@ -1,0 +1,16 @@
+<questao_to_report_result>
+	<invoice_questao>
+		<questao>
+			<pergunta>Alisson</pergunta>
+		</questao>
+		<boletim>
+			<mensagem>
+				<created_at type="datetime">2012-01-23T19:39:28Z</created_at>
+				<nota type="float">3.0</nota>
+				<autor>
+					<created_at type="datetime">2012-01-11T14:23:33Z</created_at>
+					<nome>Hivya Elias</nome>
+				</autor>
+			</mensagem>
+			<mensagem>
+				<created_at type="datetime">2012-01-23T19:39:28Z</created_at><nota type="float" nil="true"/><autor><created_at type="datetime">2012-01-12T11:18:55Z</created_at><nome>Alex Aquino</nome></autor></mensagem><mensagem><created_at type="datetime">2012-01-26T18:43:02Z</created_at><nota type="float">0.0</nota><autor><created_at type="datetime">2012-01-11T14:23:33Z</created_at><nome>Hivya Elias</nome></autor></mensagem></boletim></invoice_questao></questao_to_report_result>

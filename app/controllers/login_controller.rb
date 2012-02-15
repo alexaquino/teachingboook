@@ -1,5 +1,5 @@
 class LoginController < ApplicationController
-  before_filter :require_authentication, :only => :index
+  before_filter :require_authentication
 
   def index
     user    = api_client.get_object('me')

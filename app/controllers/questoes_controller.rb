@@ -1,4 +1,7 @@
 class QuestoesController < ApplicationController
+  helper :send_doc
+  include SendDocHelper
+  
   # GET /questoes
   # GET /questoes.xml
   def index
@@ -81,6 +84,27 @@ class QuestoesController < ApplicationController
       format.html { redirect_to(questoes_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def questao_to_report
+    @questao = Questao.find(params[:id])
+    @mensagens = @questao.respostas
+  end
+  
+  def questao_report
+    @questao = Questao.find(params[:id])
+    @mensagens = @questao.respostas
+    
+    @params = Hash.new
+    
+    @params["QUESTAO_ID"] = @questao.id
+    
+    send_doc(
+      render_to_string(:template => "questoes/questao_to_report/", :layout => false),
+      'report1',
+      @params,
+      "boletim_questao_#{@questao.id}", 
+      'pdf')
   end
   
   private

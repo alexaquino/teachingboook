@@ -1,0 +1,12 @@
+<usuario_list_result>
+	<invoice_usuarios>
+		<usuario>
+			<nome>Hivya Elias</nome>
+			<id type="integer">1</id>
+		</usuario>
+		<usuario>
+			<nome>Alex Aquino</nome>
+			<id type="integer">2</id>
+		</usuario>
+	</invoice_usuarios>
+</usuario_list_result>
