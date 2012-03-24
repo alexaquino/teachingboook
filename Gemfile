@@ -6,7 +6,7 @@ gem 'rails', '3.0.9'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2', '~> 0.2.6'
-gem 'koala', '~>1.2.1'
+gem 'koala', '~>1.4.0'
 gem 'ruby-debug'
 gem "jquery-rails", ">= 0.2.6"
 

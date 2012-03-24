@@ -43,7 +43,7 @@ GEM
       railties (~> 3.0)
       thor (~> 0.14)
     json (1.6.5)
-    koala (1.2.1)
+    koala (1.4.0)
       faraday (~> 0.7.0)
       multi_json (~> 1.0)
     linecache (0.46)
@@ -99,7 +99,7 @@ PLATFORMS
 
 DEPENDENCIES
   jquery-rails (>= 0.2.6)
-  koala (~> 1.2.1)
+  koala (~> 1.4.0)
   mysql2 (~> 0.2.6)
   rails (= 3.0.9)
   ruby-debug
