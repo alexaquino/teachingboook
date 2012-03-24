@@ -122,8 +122,8 @@ class QuestoesController < ApplicationController
   def load_autor(fb_id)
     user = Usuario.find_by_fb_id(fb_id)
     if !user
-      u = api_client.get_object(fb_id)
-      user = Usuario.new({:fb_id => u['id'].to_i, :nome => u['name'], :data_nascimento => Date.strptime(usuario['birthday'], '%m/%d/%Y')})
+      usuario = api_client.get_object(fb_id)
+      user = Usuario.new({:fb_id => usuario['id'].to_i, :nome => usuario['name'], :data_nascimento => Date.strptime(usuario['birthday'], '%m/%d/%Y')})
       user.save
     end
     user.id
