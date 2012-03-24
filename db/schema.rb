@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120123164723) do
+ActiveRecord::Schema.define(:version => 20120127153129) do
 
   create_table "alunos_turmas", :id => false, :force => true do |t|
     t.integer "aluno_id", :limit => 8
@@ -18,6 +18,11 @@ ActiveRecord::Schema.define(:version => 20120123164723) do
   end
 
   add_index "alunos_turmas", ["aluno_id", "turma_id"], :name => "index_alunos_turmas_on_aluno_id_and_turma_id", :unique => true
+
+  create_table "documents", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "mensagens", :force => true do |t|
     t.text     "conteudo"
