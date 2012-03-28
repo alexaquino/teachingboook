@@ -32,6 +32,7 @@ class Document
       result = pipe.read
       pipe.close
     end
+    puts result
     return result
   end
   
