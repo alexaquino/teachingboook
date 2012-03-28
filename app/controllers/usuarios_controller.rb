@@ -15,6 +15,7 @@ class UsuariosController < ApplicationController
   def show
     @usuario = Usuario.find(params[:id])
     @usuario_foto_url = 'https://graph.facebook.com/' + @usuario.fb_id.to_s + '/picture?type=normal'
+    @usuario_fb_page = 'http://www.facebook.com/' + @usuario.fb_id.to_s
 
     respond_to do |format|
       format.html # show.html.erb

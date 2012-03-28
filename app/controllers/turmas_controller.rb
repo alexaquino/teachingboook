@@ -17,6 +17,7 @@ class TurmasController < ApplicationController
     @professor_foto_url = 'https://graph.facebook.com/' + @turma.professor.fb_id.to_s + '/picture?type=normal'
     
     load_questoes
+    load_alunos
     
     respond_to do |format|
       format.html # show.html.erb
@@ -98,6 +99,25 @@ class TurmasController < ApplicationController
         questao = Questao.new({:pergunta => m['message'], :post_id => m['id'], :autor_id => user.id, :turma_id => @turma.id, :created_at => DateTime.strptime(data_hora, "%Y-%m-%d %H:%M:%S").to_time, :updated_at => DateTime.strptime(data_hora, "%Y-%m-%d %H:%M:%S").to_time})
         puts questao.pergunta
         questao.save
+      end
+    end
+  end
+  
+  def load_alunos
+    members = api_client.get_connection(@turma.group_id, "members")
+    members.each do |member|
+      if !Usuario.find_by_fb_id(member['id'])
+        u = api_client.get_object(member['id'])
+        new_user = Usuario.new({:fb_id => u['id'].to_i, :nome => u['name'], :data_nascimento => Date.strptime(u['birthday'], '%m/%d/%Y')})
+        new_user.save
+      end
+      puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+      puts member
+      puts member['administrator']
+      
+      aluno = Usuario.find_by_fb_id(member['id'])
+      if ((!@turma.alunos.member? aluno) && (!member['administrator']))
+        @turma.alunos << aluno
       end
     end
   end

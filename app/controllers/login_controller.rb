@@ -35,9 +35,9 @@ class LoginController < ApplicationController
   
   def cadastrar_grupos grupos, usuario
     grupos.each do |g|
-      if g['name'].include? '[TURMA]'
+      if g['name'].include? '[TeachingBook]'
         if (!grupo_existe? g) && (g['administrator'])
-          new_turma = Turma.new({:disciplina => g['name'].slice(8, g['name'].length), :group_id => g['id'], :professor_id => Usuario.find_by_fb_id(usuario['id']).id})
+          new_turma = Turma.new({:disciplina => g['name'].slice(15, g['name'].length), :group_id => g['id'], :professor_id => Usuario.find_by_fb_id(usuario['id']).id})
           new_turma.save
         end
         
