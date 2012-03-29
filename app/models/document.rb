@@ -4,8 +4,9 @@ class Document
   def self.generate_report(xml_data, report_design, params, output_type)
     report_design << '.jasper' if !report_design.match(/\.jasper$/)
     interface_classpath = Dir.getwd+"/app/jasper/bin/" 
+    
     case CONFIG['host']
-      when /mswin32/
+      when /mingw32/
         mode = "w+b" #windows requires binary mode
         Dir.foreach(Dir.getwd+"/app/jasper/lib") do |file|
           interface_classpath << ";#{Dir.getwd}/app/jasper/lib/" + file if (file != '.' and file != '..' and file.match(/.jar/))
@@ -27,7 +28,7 @@ class Document
     puts "java -Djava.awt.headless=true -classpath #{interface_classpath}: JasperInterface -o#{output_type} -f#{Dir.getwd}/app/reports/#{report_design} -cjdbc:mysql://localhost:3306/teachingboook_development?user=root&password= -p#{output}"
     
     IO.popen "java -Djava.awt.headless=true -classpath #{interface_classpath}: JasperInterface -o#{output_type} -f#{Dir.getwd}/app/reports/#{report_design} -cjdbc:mysql://localhost:3306/teachingboook_development?user=root&password= -p#{output}", mode do |pipe|
-      pipe.write xml_data
+      pipe.write xml_data 
       pipe.close_write
       result = pipe.read
       pipe.close
