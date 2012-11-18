@@ -113,7 +113,11 @@ class QuestoesController < ApplicationController
     cmts = api_client.get_connections(@questao.post_id, "comments")
     cmts.each do |c|
       if !Mensagem.find_by_post_id(c['id'])
-        resposta = Mensagem.new({:conteudo => c['message'], :post_id => c['id'], :recebedor_id => @questao.id, :recebedor_type => @questao.class.to_s, :autor_id => load_autor(c['from']['id'])})
+        data = c['created_time'].slice(0, 10)
+        hora = c['created_time'].slice(11, 8)
+        data_hora = data.to_s + ' ' + hora.to_s
+        puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + data_hora
+        resposta = Mensagem.new({:conteudo => c['message'], :post_id => c['id'], :recebedor_id => @questao.id, :recebedor_type => @questao.class.to_s, :autor_id => load_autor(c['from']['id']), :created_at => DateTime.strptime(data_hora, "%Y-%m-%d %H:%M:%S").to_time, :updated_at => DateTime.strptime(data_hora, "%Y-%m-%d %H:%M:%S").to_time})
         resposta.save
       end
     end

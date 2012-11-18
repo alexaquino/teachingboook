@@ -2,7 +2,7 @@ class LoginController < ApplicationController
   before_filter :require_authentication
 
   def index
-    user    = api_client.get_object('me')
+    user = api_client.get_object('me')
     session[:current_user] = login (user)
     redirect_to '/dashboard'
   end

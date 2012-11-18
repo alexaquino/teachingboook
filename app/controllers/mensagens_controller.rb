@@ -71,7 +71,7 @@ class MensagensController < ApplicationController
 
     respond_to do |format|
       if @mensagem.update_attributes(params[:mensagem])
-        #format.html { redirect_to(@mensagem, :notice => 'Nota atualizada com sucesso!') }
+        format.html { redirect_to('', :notice => 'Nota atualizada com sucesso!') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

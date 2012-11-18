@@ -106,14 +106,13 @@ class TurmasController < ApplicationController
   def load_alunos
     members = api_client.get_connection(@turma.group_id, "members")
     members.each do |member|
+      puts member
       if !Usuario.find_by_fb_id(member['id'])
-        u = api_client.get_object(member['id'])
-        new_user = Usuario.new({:fb_id => u['id'].to_i, :nome => u['name'], :data_nascimento => Date.strptime(u['birthday'], '%m/%d/%Y')})
+        usuario = api_client.get_object(member['id'])
+        #new_user = Usuario.new({:fb_id => u['id'].to_i, :nome => u['name'], :data_nascimento => Date.strptime(u['birthday'], '%m/%d/%Y')})
+        new_user = Usuario.new({:fb_id => usuario['id'].to_i, :nome => usuario['name']})
         new_user.save
       end
-      puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-      puts member
-      puts member['administrator']
       
       aluno = Usuario.find_by_fb_id(member['id'])
       if ((!@turma.alunos.member? aluno) && (!member['administrator']))

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.6105100000000008"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="114"/>
 	<parameter name="QUESTAO_ID" class="java.lang.Long">
 		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
 	</parameter>
@@ -11,8 +11,8 @@
   coalesce(avg(m.nota), 0) as media,
   q.pergunta as questao,
   count(m.id) as qtd_respostas,
-  min(m.created_at) as data_primeira_resposta,
-  max(m.created_at) as data_ultima_resposta,
+  cast(min(m.created_at) as date) as data_primeira_resposta,
+  cast(max(m.created_at) as date) as data_ultima_resposta,
   t.disciplina as turma
 from questoes q
   join mensagens m on (m.recebedor_id = q.id and m.recebedor_type = 'Questao')
@@ -26,8 +26,8 @@ order by u.nome]]>
 	<field name="media" class="java.lang.Double"/>
 	<field name="questao" class="java.lang.String"/>
 	<field name="qtd_respostas" class="java.lang.Long"/>
-	<field name="data_primeira_resposta" class="java.sql.Timestamp"/>
-	<field name="data_ultima_resposta" class="java.sql.Timestamp"/>
+	<field name="data_primeira_resposta" class="java.sql.Date"/>
+	<field name="data_ultima_resposta" class="java.sql.Date"/>
 	<field name="turma" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -36,7 +36,7 @@ order by u.nome]]>
 		<band height="79" splitType="Stretch">
 			<image>
 				<reportElement x="166" y="11" width="53" height="56"/>
-				<imageExpression><![CDATA["E:\\Alex Aquino\\projects\\rails_projects\\teachingboook\\public\\images\\general\\books_logo.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["E:\\alexqno\\projects\\rails_projects\\teachingboook\\public\\images\\general\\books_logo.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="219" y="24" width="170" height="31"/>
@@ -61,7 +61,7 @@ order by u.nome]]>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[Questão:]]></text>
+				<text><![CDATA[Fórum:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="53" y="8" width="270" height="15"/>
@@ -120,7 +120,7 @@ order by u.nome]]>
 				<text><![CDATA[Qtd Respostas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="289" y="0" width="124" height="15" backcolor="#999999"/>
+				<reportElement mode="Opaque" x="289" y="0" width="248" height="15" backcolor="#999999"/>
 				<box leftPadding="2">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -128,38 +128,24 @@ order by u.nome]]>
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[Primeira Resposta]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="413" y="0" width="124" height="15" backcolor="#999999"/>
-				<box leftPadding="2">
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<font isBold="true" isItalic="false"/>
-				</textElement>
-				<text><![CDATA[Última Resposta]]></text>
+				<text><![CDATA[Interações]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="15" splitType="Stretch">
+		<band height="105" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="18" y="0" width="519" height="15" backcolor="#CCCCCC">
+				<reportElement mode="Opaque" x="18" y="0" width="271" height="105" backcolor="#CCCCCC">
 					<printWhenExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></printWhenExpression>
 				</reportElement>
 				<textElement/>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="18" y="0" width="126" height="15"/>
+				<reportElement x="18" y="0" width="126" height="105"/>
 				<box leftPadding="2">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -171,7 +157,7 @@ order by u.nome]]>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="144" y="0" width="56" height="15"/>
+				<reportElement x="144" y="0" width="56" height="105"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -183,7 +169,7 @@ order by u.nome]]>
 				<textFieldExpression><![CDATA[$F{media}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="200" y="0" width="89" height="15"/>
+				<reportElement x="200" y="0" width="89" height="105"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -193,30 +179,6 @@ order by u.nome]]>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{qtd_respostas}]]></textFieldExpression>
-			</textField>
-			<textField pattern="dd/MM/yyyy HH.mm.ss">
-				<reportElement x="289" y="0" width="124" height="15"/>
-				<box leftPadding="2">
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{data_primeira_resposta}]]></textFieldExpression>
-			</textField>
-			<textField pattern="dd/MM/yyyy HH.mm.ss">
-				<reportElement x="413" y="0" width="124" height="15"/>
-				<box leftPadding="2">
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{data_ultima_resposta}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
